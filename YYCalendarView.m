@@ -167,7 +167,24 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     /*某一天被点击*/
-    NSLog(@"------->%ld",(long)indexPath.row);
+    NSDateComponents *comp = [[NSCalendar currentCalendar] components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay) fromDate:self.calendarDate];
+    NSInteger firstWeekday = [self firstWeekdayInThisMonth:self.calendarDate];
+    
+    NSInteger day = 0;
+    NSInteger i = indexPath.row;
+    day = i - firstWeekday + 1;
+    YYCalendarCell *cell = (YYCalendarCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    if (cell.calendarCellType == YYCalendarCellLast) {
+        NSLog(@"------->上个月");
+    }else if (cell.calendarCellType == YYCalendarCellNow){
+        NSLog(@"------->本月");
+        if (self.oneDayClickedHandle) {
+            self.oneDayClickedHandle([comp year], [comp month], day);
+        }
+    }else{
+        NSLog(@"------->下个月");
+    }
+    
 }
 
 #pragma mark -

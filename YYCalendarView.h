@@ -31,6 +31,8 @@ typedef void (^RightSwipes) (YYCalendarView *myView, UICollectionView *myCollect
 @property (nonatomic, strong) NSLayoutConstraint     *collectionViewHeightConstraint;
 /*!用户日历初始化和改变的时候的数据源*/
 @property (nonatomic, strong) NSDate                 *calendarDate;
+/*!某几天被点击的回调*/
+@property (nonatomic, copy) void (^oneDayClickedHandle)(NSInteger year, NSInteger month, NSInteger day);
 
 /*!日期数据更新*/
 -(void)updateDate:(NSDate*)date;

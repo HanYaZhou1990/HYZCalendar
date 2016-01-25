@@ -62,6 +62,9 @@
         _calendarViewHeightConstraint.constant = myView.collectionViewHeightConstraint.constant;
         self.title = [self dateToString:_currentDate];
     };
+    calendarView.oneDayClickedHandle = ^(NSInteger year, NSInteger month, NSInteger day){
+        self.title = [NSString stringWithFormat:@"%ld-%ld-%ld",year,month,day];
+    };
     calendarView.backgroundColor = [UIColor yellowColor];
     [self.view addSubview:calendarView];
     [self.view addConstraint:[NSLayoutConstraint
